@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoStilo | Moda Sustentável & Estilo Pessoal</title>
+    <style>
+        :root {
+            --bg-color: #faf8f5;
+            --card-bg: #ffffff;
+            --primary-color: #3a5a40;
+            --accent-color: #a3b18a;
+            --text-color: #2b2b2b;
+            --text-muted: #666666;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            color: var(--accent-color);
+            margin-top: 0.5rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            background-color: #344e41;
+            padding: 0.8rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .filter-btn {
+            background: none;
+            border: 1px solid var(--accent-color);
+            color: #fff;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        article {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        article:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-img {
+            height: 200px;
+            background-color: #dad7cd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .tag {
+            align-self: flex-start;
+            background-color: #f0f4f1;
+            color: var(--primary-color);
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        article h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        article p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 1rem;
+        }
+
+        .like-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--text-muted);
+        }
+
+        .like-btn.liked {
+            color: #e63946;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #344e41;
+            color: var(--accent-color);
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            nav { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>EcoStilo</h1>
+        <p>Consciência, Autenticidade e Estilo Sustentável</p>
+    </header>
+
+    <nav>
+        <button class="filter-btn active" onclick="filterPosts('todos')">Todos</button>
+        <button class="filter-btn" onclick="filterPosts('capsula')">Guarda-Roupa Cápsula</button>
+        <button class="filter-btn" onclick="filterPosts('brecho')">Dicas de Brechó</button>
+        <button class="filter-btn" onclick="filterPosts('upcycling')">Upcycling</button>
+    </nav>
+
+    <main class="container">
+        <div class="posts-grid" id="posts-container">
+            
+            <article data-category="capsula">
+                <div class="card-img">🌿</div>
+                <div class="card-body">
+                    <span class="tag">Guarda-Roupa Cápsula</span>
+                    <h2>Como Criar um Guarda-Roupa Cápsula do Zero</h2>
+                    <p>Descubra como selecionar 30 peças versáteis que combinam entre si e facilitam sua rotina sem perder o estilo pessoal.</p>
+                    <div class="card-footer">
+                        <small>5 min de leitura</small>
+                        <button class="like-btn" onclick="toggleLike(this)">♥ <span class="count">12</span></button>
+                    </div>
+                </div>
+            </article>
+
+            <article data-category="brecho">
+                <div class="card-img">🛍️</div>
+                <div class="card-body">
+                    <span class="tag">Dicas de Brechó</span>
+                    <h2>Guia Definitivo para Garimpar em Brechós</h2>
+                    <p>Aprenda a analisar a qualidade dos tecidos, garimpar peças vintage de valor e negociar achados incríveis sem erro.</p>
+                    <div class="card-footer">
+                        <small>4 min de leitura</small>
+                        <button class="like-btn" onclick="toggleLike(this)">♥ <span class="count">24</span></button>
+                    </div>
+                </div>
+            </article>
+
+            <article data-category="upcycling">
+                <div class="card-img">✂️</div>
+                <div class="card-body">
+                    <span class="tag">Upcycling</span>
+                    <h2>3 Truques Fáceis para Customizar Jeans Antigos</h2>
+                    <p>Transforme calças esquecidas no armário usando bordados simples, cortes estratégicos e aplicações de retalhos.</p>
+                    <div class="card-footer">
+                        <small>6 min de leitura</small>
+                        <button class="like-btn" onclick="toggleLike(this)">♥ <span class="count">18</span></button>
+                    </div>
+                </div>
+            </article>
+
+            <article data-category="capsula">
+                <div class="card-img">🎨</div>
+                <div class="card-body">
+                    <span class="tag">Guarda-Roupa Cápsula</span>
+                    <h2>Paleta de Cores e Estilo Pessoal</h2>
+                    <p>Como definir uma cartela de cores coerente para manter seu guarda-roupa harmônico e prático nas quatro estações.</p>
+                    <div class="card-footer">
+                        <small>3 min de leitura</small>
+                        <button class="like-btn" onclick="toggleLike(this)">♥ <span class="count">9</span></button>
+                    </div>
+                </div>
+            </article>
+
+            <article data-category="upcycling">
+                <div class="card-img">🧵</div>
+                <div class="card-body">
+                    <span class="tag">Upcycling</span>
+                    <h2>Reparos Visíveis: A Arte do Sashiko</h2>
+                    <p>Conheça a técnica japonesa de costura tradicional que transforma rasgos e remendos em detalhes artísticos únicos.</p>
+                    <div class="card-footer">
+                        <small>7 min de leitura</small>
+                        <button class="like-btn" onclick="toggleLike(this)">♥ <span class="count">31</span></button>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 EcoStilo - Moda Consciente & Estilo Sustentável</p>
+    </footer>
+
+    <script>
+        function filterPosts(category) {
+            const posts = document.querySelectorAll('#posts-container article');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            posts.forEach(post => {
+                if (category === 'todos' || post.getAttribute('data-category') === category) {
+                    post.style.display = 'flex';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleLike(button) {
+            const countSpan = button.querySelector('.count');
+            let count = parseInt(countSpan.textContent);
+
+            if (button.classList.contains('liked')) {
+                button.classList.remove('liked');
+                countSpan.textContent = count - 1;
+            } else {
+                button.classList.add('liked');
+                countSpan.textContent = count + 1;
+            }
+        }
+    </script>
+</body>
+</html>
