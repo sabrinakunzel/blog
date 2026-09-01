@@ -26,3 +26,20 @@ function toggleLike(button) {
         countSpan.textContent = count + 1;
     }
 }
+
+function openModal(title, category, content) {
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-tag').textContent = category;
+    document.getElementById('modal-body').innerHTML = content;
+    document.getElementById('article-modal').classList.add('active');
+}
+
+function closeModal(event) {
+    if (event.target.classList.contains('modal-overlay')) {
+        document.getElementById('article-modal').classList.remove('active');
+    }
+}
+
+function closeModalForce() {
+    document.getElementById('article-modal').classList.remove('active');
+}
